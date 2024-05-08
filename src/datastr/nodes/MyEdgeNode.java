@@ -46,7 +46,10 @@ public class MyEdgeNode {
 		setWeight(weight);
 	}
 	//toString
-	
+	public String toString()
+	{
+		return weight + " km";
+	}
 	
 	
 }
