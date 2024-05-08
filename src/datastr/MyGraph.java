@@ -1,5 +1,6 @@
 package datastr;
 
+import datastr.nodes.MyEdgeNode;
 import datastr.nodes.MyVerticeNode;
 
 public class MyGraph<Ttype> {
@@ -77,19 +78,41 @@ public class MyGraph<Ttype> {
 	
 	//2. pievienot ceļu no konkrētas virsotnes un kādu citu virsotni
 	//funkcijas deklaracija
-	//pārbaudam ienākošos parametrus
-	//noskaidrot, via abas virstones eksistē grafā
-	//ja eksistē, tad izveido jaunu ceļa mezglu
-	//vai tas ir pirmais ceļa bloks
-	//vai tas ir kārtejais
-	
-	//ja neeksistē, izmest izņēmumu
-	
-	
-	
-	
+	public void addEdge(Ttype verticeFrom, Ttype verticeTo, float weight) throws Exception
+	{
+		if(verticeFrom == null || verticeTo == null || weight<=0 || weight >= 41000)
+			throw new Exception("There is a problem with params");
+		
+		if(verticeFrom.equals(verticeTo))
+			throw new Exception("It is not possible to create an edge to the same vertice");
+		
+		int indexFrom = searchVerticeByElement(verticeFrom);
+		int indexTo = searchVerticeByElement(verticeTo);
+		
+		if(indexFrom == -1 || indexTo == -1)
+			throw new Exception("One or both vertices are not in the graph");
+		
+		MyEdgeNode newEdgeNode = new MyEdgeNode(indexTo, weight);
+		
+		//sis būs pirmais ceļa bloks sai virsotnei
+		if(vertices[indexFrom].getFirstEdgeNode() == null)
+		{
+			vertices[indexFrom].setFirstEdgeNode(newEdgeNode);
+		}
+		else
+		{
+			MyEdgeNode firstEdgeNode = vertices[indexFrom].getFirstEdgeNode();
+			newEdgeNode.setNext(firstEdgeNode);
+			firstEdgeNode.setPrevious(newEdgeNode);
+			firstEdgeNode = newEdgeNode;
+		}
+		
 	
 	//3. izprintet visas virsotnes ar visiem piesiastītajiem ceļiem
+		//funkcijas deklarācija
+		//pārbaude, vai grafs ir tukšs
+		//iet caurti virsotņu mezglu mašīvām un katru izprintet kopā ar visiem ceļa blokiem
+		
 	//4. Mainservisā izveidot karti, ar vismas 4 pilsetam un 6 ceļiem
 	
 
