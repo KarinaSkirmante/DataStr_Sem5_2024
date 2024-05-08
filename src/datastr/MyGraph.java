@@ -92,6 +92,7 @@ public class MyGraph<Ttype> {
 		if(indexFrom == -1 || indexTo == -1)
 			throw new Exception("One or both vertices are not in the graph");
 		
+		//TODO pārbaude, vai tads ceļs starp minetjaām virsotnēm jau neekesistē
 		MyEdgeNode newEdgeNode = new MyEdgeNode(indexTo, weight);
 		
 		//sis būs pirmais ceļa bloks sai virsotnei
@@ -104,16 +105,36 @@ public class MyGraph<Ttype> {
 			MyEdgeNode firstEdgeNode = vertices[indexFrom].getFirstEdgeNode();
 			newEdgeNode.setNext(firstEdgeNode);
 			firstEdgeNode.setPrevious(newEdgeNode);
-			firstEdgeNode = newEdgeNode;
+			vertices[indexFrom].setFirstEdgeNode(newEdgeNode);
+			
 		}
-		
-	
+	}
+	//TODO
 	//3. izprintet visas virsotnes ar visiem piesiastītajiem ceļiem
 		//funkcijas deklarācija
 		//pārbaude, vai grafs ir tukšs
 		//iet caurti virsotņu mezglu mašīvām un katru izprintet kopā ar visiem ceļa blokiem
 		
-	//4. Mainservisā izveidot karti, ar vismas 4 pilsetam un 6 ceļiem
+	public void print() throws Exception
+	{
+		if(isEmpty()) throw new Exception("Graph is empty");
+		
+		for(int i = 0; i < counter; i++) {
+			System.out.print(vertices[i].getElement() + " -> ");
+			MyEdgeNode tempEdge = vertices[i].getFirstEdgeNode();
+			while(tempEdge!=null)
+			{
+				System.out.print(vertices[tempEdge.getIndexOfNeighbour()].getElement() 
+						+ " " + tempEdge.getWeight()  + " km; ");
+				tempEdge = tempEdge.getNext();
+			}
+			System.out.println();
+		}
+	}
 	
+	//4. Mainservisā izveidot karti, ar vismas 4 pilsetam un 6 ceļiem
+	//pārabude, vai celš jau neeisistē
+		//rediget ceļa garumu
+		//rediget virsotnes nosaukumu 
 
 }
