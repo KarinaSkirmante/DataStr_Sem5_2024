@@ -14,6 +14,7 @@ public class MainService {
 			map.addVertice("Tukums");
 			
 			map.addEdge("Ventspils", "Rīga", 189);
+			map.addEdge("Rīga","Ventspils", 189);
 			map.addEdge("Ventspils", "Kuldīga", 56.49f);
 			map.addEdge("Ventspils", "Talsi", 64);
 			map.addEdge("Tukums", "Rīga", 58);
