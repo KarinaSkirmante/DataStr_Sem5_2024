@@ -1,6 +1,7 @@
 package datastr;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import datastr.nodes.MyEdgeNode;
 import datastr.nodes.MyVerticeNode;
@@ -159,6 +160,74 @@ public class MyGraph<Ttype> {
 		}
 		return result;
 		
+	}
+	
+	private void clearVisited() throws Exception
+	{
+		if(isEmpty())  throw new Exception("Graph is empty");
+		
+		for(int i = 0; i < counter; i++) {
+			vertices[i].setVisited(false);
+		}
+		
+	}
+	
+	public ArrayList<Ttype> searchPathByDepth(Ttype elementFrom, Ttype elementTo) throws Exception
+	{
+		if(isEmpty())  throw new Exception("Graph is empty");
+		int indexFrom = searchVerticeByElement(elementFrom);
+		int indexTo = searchVerticeByElement(elementTo);
+		
+		if(indexFrom == -1 || indexTo == -1)
+			throw new Exception("One or both vertices are not in the graph");
+		
+		
+		clearVisited();
+		ArrayList<Ttype> result = new ArrayList<Ttype>();
+		
+		boolean isFound = false;
+		
+		Stack<MyVerticeNode> stack = new Stack<MyVerticeNode>();
+		
+		MyVerticeNode verticeNodeFrom = vertices[searchVerticeByElement(elementFrom)];
+		stack.push(verticeNodeFrom);
+		
+		do
+		{
+			MyVerticeNode tempVNode = stack.pop();
+			tempVNode.setVisited(true);
+			if(tempVNode.getElement().equals(elementTo)) {
+				result.add((Ttype) tempVNode.getElement());
+				isFound = true;
+				
+			}
+			else
+			{
+				result.add((Ttype) tempVNode.getElement());
+				ArrayList<MyVerticeNode> neighbours = getNeighbours((Ttype)tempVNode.getElement());
+				
+				for(MyVerticeNode tempNNode:neighbours)
+				{
+					if(!tempNNode.isVisited())
+					{
+						stack.push(tempNNode);
+					}
+				}
+			}
+	
+		}while(!stack.isEmpty() && !isFound);
+		
+		
+		
+		
+		
+		
+		if(!isFound) 
+			throw new Exception("Path from " + elementFrom + " to " + elementTo + " doesn't exist");
+		
+		
+		return result;
+	
 	}
 
 }

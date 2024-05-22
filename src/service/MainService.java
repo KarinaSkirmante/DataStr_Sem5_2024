@@ -1,5 +1,7 @@
 package service;
 
+import java.util.ArrayList;
+
 import datastr.MyGraph;
 
 public class MainService {
@@ -21,9 +23,24 @@ public class MainService {
 			map.addEdge("Rīga", "Kuldīga", 148.88f);
 			map.print();
 			
+			System.out.println("--------------DEPTH----------------");
+			ArrayList<String> path1 = map.searchPathByDepth("Ventspils", "Kuldīga");
+			for(String tempS: path1)
+			{
+				System.out.print(tempS + " -> ");
+			}
+			System.out.println();
+			
+			ArrayList<String> path2 = map.searchPathByDepth("Talsi", "Tukums");
+			for(String tempS: path2)
+			{
+				System.out.print(tempS + " -> ");
+			}
+			System.out.println();
+			
+			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e);
 		}
 		
 
