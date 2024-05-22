@@ -1,5 +1,7 @@
 package datastr;
 
+import java.util.ArrayList;
+
 import datastr.nodes.MyEdgeNode;
 import datastr.nodes.MyVerticeNode;
 
@@ -132,9 +134,31 @@ public class MyGraph<Ttype> {
 		}
 	}
 	
-	//4. Mainservisā izveidot karti, ar vismas 4 pilsetam un 6 ceļiem
-	//pārabude, vai celš jau neeisistē
-		//rediget ceļa garumu
-		//rediget virsotnes nosaukumu 
+
+	private ArrayList<MyVerticeNode> getNeighbours(Ttype element) throws Exception{
+		//TODO
+		if(element == null) throw new Exception("There is a problem with element");
+		int indexOfElement = searchVerticeByElement(element);
+		if(indexOfElement == -1) throw new Exception("Vertice is not in the graph");
+		
+		ArrayList<MyVerticeNode> result = new ArrayList<MyVerticeNode>();
+
+		MyVerticeNode verticeNode = vertices[indexOfElement];
+		
+		MyEdgeNode tempE = verticeNode.getFirstEdgeNode();
+		
+		while(tempE!=null)
+		{
+			int indexOfNeighbour = tempE.getIndexOfNeighbour();
+			MyVerticeNode verticeNodeOfNeighbour = vertices[indexOfNeighbour];
+			result.add(verticeNodeOfNeighbour);
+			
+			//īsā forma
+			//result.add(vertices[tempE.getIndexOfNeighbour()]);
+			tempE = tempE.getNext();
+		}
+		return result;
+		
+	}
 
 }
