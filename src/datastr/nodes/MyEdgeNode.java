@@ -1,6 +1,6 @@
 package datastr.nodes;
 
-public class MyEdgeNode {
+public class MyEdgeNode implements Comparable<MyEdgeNode>{
 
 	private int indexOfNeighbour;
 	private float weight;//TODO var ceļa svaram izveidot atsevisķu klasi ar vairākiem parametrime, piemēram, garums, segums, max ātrums
@@ -49,6 +49,11 @@ public class MyEdgeNode {
 	public String toString()
 	{
 		return weight + " km";
+	}
+	@Override
+	public int compareTo(MyEdgeNode arg0) {
+		if(weight > arg0.getWeight()) return 1;
+		else return -1;
 	}
 	
 	

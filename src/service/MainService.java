@@ -42,6 +42,15 @@ public class MainService {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		//TODO uztaisīt piemēru no moodle sgrafu sadaļā (Minimālās pārklāšanas koks (Minimum Spanning Tree))
+		try {
+			System.out.println("------------MINIMUM SPANNING TREE-----------");
+			map.minimumSpanningTree("Ventspils");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 
 	}
